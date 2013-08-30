@@ -1,0 +1,445 @@
+{
+    "params": {
+        "allow_data_loss_during_shutdown": {
+            "default": "false",
+            "dynamic": false,
+            "type": "bool"
+        },
+        "alog_block_size": {
+            "default": "4096",
+            "descr": "Logging block size.",
+            "dynamic": false,
+            "type": "size_t"
+        },
+        "alog_path": {
+            "default": "",
+            "descr": "Path to the access log.",
+            "dynamic": false,
+            "type": "std::string"
+        },
+        "alog_sleep_time": {
+            "default": "1440",
+            "descr": "Number of minutes between each sweep for the access log",
+            "type": "size_t",
+            "validator": {
+                "range": {
+                    "max": 4320,
+                    "min": 1
+                }
+            }
+        },
+        "alog_task_time": {
+            "default": "10",
+            "descr": "Hour in GMT time when access scanner task is scheduled to run",
+            "type": "size_t",
+            "validator": {
+                "range": {
+                    "max": 23,
+                    "min": 0
+                }
+            }
+        },
+        "backend": {
+            "default": "couchdb",
+            "dynamic": false,
+            "type": "std::string",
+            "validator": {
+                "enum": [
+                    "blackhole",
+                    "couchdb"
+                ]
+            }
+        },
+        "bg_fetch_delay": {
+            "default": "0",
+            "type": "size_t",
+            "validator": {
+                "range": {
+                    "max": 900,
+                    "min": 0
+                }
+            }
+        },
+        "chk_max_items": {
+            "default": "5000",
+            "type": "size_t"
+        },
+        "chk_period": {
+            "default": "1800",
+            "type": "size_t"
+        },
+        "chk_remover_stime": {
+            "default": "5",
+            "type": "size_t"
+        },
+        "concurrentDB": {
+            "default": "true",
+            "type": "bool"
+        },
+        "config_file": {
+            "default": "",
+            "dynamic": false,
+            "type": "std::string"
+        },
+        "couch_bucket": {
+            "default": "default",
+            "dynamic": false,
+            "type": "std::string"
+        },
+        "couch_host": {
+            "default": "localhost",
+            "dynamic": false,
+            "type": "std::string"
+        },
+        "couch_port": {
+            "default": "11213",
+            "dynamic": false,
+            "type": "size_t"
+        },
+        "couch_reconnect_sleeptime": {
+            "default": "250",
+            "dynamic": false,
+            "type": "size_t"
+        },
+        "couch_response_timeout": {
+            "default": "180000",
+            "descr": "Length of time to wait for a response from couchdb before reconnecting (in ms)",
+            "type": "size_t"
+        },
+        "data_traffic_enabled": {
+            "default": "true",
+            "descr": "True if we want to enable data traffic after warmup is complete",
+            "type": "bool"
+        },
+        "dbname": {
+            "default": "/tmp/test",
+            "descr": "Path to on-disk storage.",
+            "dynamic": false,
+            "type": "std::string"
+        },
+        "exp_pager_stime": {
+            "default": "3600",
+            "type": "size_t"
+        },
+        "expiry_window": {
+            "default": "3",
+            "descr": "Expiry window to not persist an object that is expired (or will be soon)",
+            "type": "size_t"
+        },
+        "failpartialwarmup": {
+            "default": "true",
+            "type": "bool"
+        },
+        "flushall_enabled": {
+            "default": "false",
+            "descr": "True if memcached flush API is enabled",
+            "type": "bool"
+        },
+        "getl_default_timeout": {
+            "default": "15",
+            "descr": "The default timeout for a getl lock in (s)",
+            "type": "size_t"
+        },
+        "getl_max_timeout": {
+            "default": "30",
+            "descr": "The maximum timeout for a getl lock in (s)",
+            "type": "size_t"
+        },
+        "ht_locks": {
+            "default": "0",
+            "type": "size_t"
+        },
+        "ht_size": {
+            "default": "0",
+            "type": "size_t"
+        },
+        "inconsistent_slave_chk": {
+            "default": "false",
+            "type": "bool"
+        },
+        "initfile": {
+            "default": "",
+            "type": "std::string"
+        },
+        "item_num_based_new_chk": {
+            "default": "true",
+            "descr": "True if the number of items in the current checkpoint plays a role in a new checkpoint creation",
+            "type": "bool"
+        },
+        "keep_closed_chks": {
+            "default": "false",
+            "descr": "True if we want to keep the closed checkpoints for each vbucket unless the memory usage is above high water mark",
+            "type": "bool"
+        },
+        "klog_block_size": {
+            "default": "4096",
+            "descr": "Logging block size.",
+            "type": "size_t"
+        },
+        "klog_compactor_queue_cap": {
+            "default": "500000",
+            "descr": "Persistence queue cap to prevent the log compactor from being scheduled",
+            "type": "size_t"
+        },
+        "klog_compactor_stime": {
+            "default": "3600",
+            "descr": "Sleep time of a mutation log compactor",
+            "type": "size_t"
+        },
+        "klog_flush": {
+            "default": "commit2",
+            "descr": "When to flush the log (complete current block).",
+            "enum": [
+                "off",
+                "commit1",
+                "commit2",
+                "full"
+            ],
+            "type": "std::string"
+        },
+        "klog_max_entry_ratio": {
+            "default": "10",
+            "descr": "Maximum ratio of the number of items logged to the number of unique items",
+            "type": "size_t"
+        },
+        "klog_max_log_size": {
+            "default": "2147483647",
+            "descr": "Maximum size of a log file allowed (2GB by default)",
+            "type": "size_t"
+        },
+        "klog_path": {
+            "default": "",
+            "descr": "Path to the mutation key log.",
+            "type": "std::string"
+        },
+        "klog_sync": {
+            "default": "commit2",
+            "descr": "When to sync the log.",
+            "enum": [
+                "off",
+                "commit1",
+                "commit2",
+                "full"
+            ],
+            "type": "std::string"
+        },
+        "max_checkpoints": {
+            "default": "2",
+            "type": "size_t"
+        },
+        "max_item_size": {
+            "default": "(20 * 1024 * 1024)",
+            "descr": "Maximum number of bytes allowed for an item",
+            "type": "size_t"
+        },
+        "max_size": {
+            "default": "0",
+            "type": "size_t"
+        },
+        "max_txn_size": {
+            "default": "4000",
+            "descr": "Maximum number of mutations per transaction",
+            "type": "size_t",
+            "validator": {
+                "range": {
+                    "max": 10000000,
+                    "min": 1
+                }
+            }
+        },
+        "max_vbuckets": {
+            "default": "1024",
+            "descr": "Maximum number of vbuckets expected",
+            "dynamic": false,
+            "type": "size_t"
+        },
+        "mem_high_wat": {
+            "default": "max",
+            "type": "size_t"
+        },
+        "mem_low_wat": {
+            "default": "max",
+            "type": "size_t"
+        },
+        "min_data_age": {
+            "default": "0",
+            "descr": "Minimum data stability time before persist",
+            "type": "size_t",
+            "validator": {
+                "range": {
+                    "max": 86400,
+                    "min": 0
+                }
+            }
+        },
+        "mutation_mem_threshold": {
+            "default": "95",
+            "type": "size_t"
+        },
+        "pager_active_vb_pcnt": {
+            "default": "40",
+	    "descr": "Active vbuckets paging percentage",
+            "type": "size_t",
+            "validator": {
+                "range": {
+                    "max": 50,
+                    "min": 0
+                }
+            }
+        },
+        "pager_unbiased_period": {
+            "default": "60",
+            "descr": "Number of minutes since access scanner time in which item pager ignores items nru info",
+            "type": "size_t",
+            "validator": {
+                "range": {
+                    "max": 720,
+                    "min": 1
+                }
+            }
+        },
+        "postInitfile": {
+            "default": "",
+            "type": "std::string"
+        },
+        "queue_age_cap": {
+            "default": "900",
+            "descr": "Maximum queue time before forcing persist",
+            "type": "size_t",
+            "validator": {
+                "range": {
+                    "max": 86400,
+                    "min": 0
+                }
+            }
+        },
+        "stored_val_type": {
+            "default": "",
+            "type": "std::string"
+        },
+        "tap_ack_grace_period": {
+            "default": "300",
+            "type": "size_t"
+        },
+        "tap_ack_initial_sequence_number": {
+            "default": "1",
+            "type": "size_t"
+        },
+        "tap_ack_interval": {
+            "default": "1000",
+            "type": "size_t"
+        },
+        "tap_ack_window_size": {
+            "default": "10",
+            "type": "size_t"
+        },
+        "tap_backfill_resident": {
+            "default": "0.9",
+            "type": "float"
+        },
+        "tap_backlog_limit": {
+            "default": "5000",
+            "type": "size_t"
+        },
+        "tap_backoff_period": {
+            "default": "5.0",
+            "type": "float"
+        },
+        "tap_bg_max_pending": {
+            "default": "500",
+            "type": "size_t"
+        },
+        "tap_keepalive": {
+            "default": "0",
+            "type": "size_t"
+        },
+        "tap_noop_interval": {
+            "default": "200",
+            "descr": "Number of seconds between a noop is sent on an idle connection",
+            "type": "size_t"
+        },
+        "tap_requeue_sleep_time": {
+            "default": "0.1",
+            "type": "float"
+        },
+        "tap_throttle_cap_pcnt": {
+            "default": "10",
+            "descr": "Percentage of total items in write queue at which we throttle tap input",
+            "type": "size_t",
+            "validator": {
+                "range": {
+                    "max": 100,
+                    "min": 0
+                }
+            }
+        },
+        "tap_throttle_queue_cap": {
+            "default": "1000000",
+            "descr": "Max size of a write queue to throttle incoming tap input.",
+            "type": "ssize_t",
+            "validator": {
+                "range": {
+                    "max": 100000000,
+                    "min": -1
+                }
+            }
+        },
+        "tap_throttle_threshold": {
+            "default": "90",
+            "descr": "Percentage of max mem at which we begin NAKing tap input.",
+            "type": "size_t",
+            "validator": {
+                "range": {
+                    "max": 100,
+                    "min": 0
+                }
+            }
+        },
+        "vb0": {
+            "default": "true",
+            "type": "bool"
+        },
+        "waitforwarmup": {
+            "default": "true",
+            "type": "bool"
+        },
+        "warmup": {
+            "default": "true",
+            "type": "bool"
+        },
+        "warmup_batch_size": {
+            "default": "1000",
+            "descr": "The size of each batch loaded during warmup.",
+            "dynamic": false,
+            "type": "size_t",
+            "validator": {
+                "range": {
+                    "max": 10000,
+                    "min": 1
+                }
+            }
+        },
+        "warmup_min_memory_threshold": {
+            "default": "100",
+            "descr": "Percentage of max mem warmed up before we enable traffic.",
+            "type": "size_t",
+            "validator": {
+                "range": {
+                    "max": 100,
+                    "min": 0
+                }
+            }
+        },
+        "warmup_min_items_threshold": {
+            "default": "100",
+            "descr": "Percentage of total items warmed up before we enable traffic.",
+            "type": "size_t",
+            "validator": {
+                "range": {
+                    "max": 100,
+                    "min": 0
+                }
+            }
+        }
+    }
+}
